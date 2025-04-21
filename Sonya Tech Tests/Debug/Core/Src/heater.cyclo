@@ -1,0 +1,3 @@
+../Core/Src/heater.c:24:10:calculatePIDHeater	6
+../Core/Src/heater.c:56:6:heaterOn	7
+../Core/Src/heater.c:98:6:heaterOff	1

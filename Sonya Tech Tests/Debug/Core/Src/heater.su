@@ -1,0 +1,3 @@
+../Core/Src/heater.c:24:10:calculatePIDHeater	40	static
+../Core/Src/heater.c:56:6:heaterOn	48	static
+../Core/Src/heater.c:98:6:heaterOff	16	static

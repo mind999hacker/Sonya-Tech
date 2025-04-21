@@ -1,0 +1,2 @@
+../Core/Src/cooler.c:12:10:calculatePIDCooler	48	static
+../Core/Src/cooler.c:41:6:coolerOn	32	static
