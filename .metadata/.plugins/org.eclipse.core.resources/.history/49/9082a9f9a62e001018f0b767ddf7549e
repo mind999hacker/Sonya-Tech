@@ -1,0 +1,30 @@
+#include "stm32f1xx_hal.h"
+#include <stdbool.h>
+#include "cmsis_os.h"
+
+
+
+#define KP 5.0f  // Proportional gain
+#define KI 0.05f  // Integral gain
+#define KD 0.0f  // Derivative gain
+
+// Define limits for the PWM duty cycle
+#define PWM_MIN 0
+#define PWM_MAX 100
+
+#define target_temperature 190    // Target temperature
+
+
+
+// Function prototypes
+
+// Calculates using PID currunt_temp and target_temp and returns a PWM Duty-cycle number between 300-35
+uint16_t calculatePIDHeater();
+
+//Logic to get temperature from mlx90614 and use PID to make turn on turn on heater coil to specific temps
+void heaterOn(I2C_HandleTypeDef *hi2c1, TIM_HandleTypeDef *htim1);
+
+void heaterOff(I2C_HandleTypeDef *hi2c1, TIM_HandleTypeDef *htim1);
+
+
+

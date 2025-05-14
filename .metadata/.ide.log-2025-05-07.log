@@ -1,0 +1,48 @@
+2025-05-09 02:06:56,184 [WARN] IP:2251 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-05-09 02:06:56,189 [WARN] IP:2251 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-05-09 02:06:56,191 [WARN] IP:2251 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-05-09 02:06:56,191 [WARN] IP:2251 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-05-09 02:07:30,602 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-05-09 02:07:30,679 [WARN] IP:2251 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-05-09 02:07:30,679 [WARN] IP:2251 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-05-09 02:07:30,680 [WARN] IP:2251 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-05-09 02:07:30,680 [WARN] IP:2251 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-05-09 02:07:52,316 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 1000625952 Bytes (1073741824)
+2025-05-09 02:07:55,827 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 699800416 Bytes (1073741824)
+2025-05-09 02:07:56,586 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 752229216 Bytes (1073741824)
+2025-05-09 02:07:57,059 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: NVIC
+2025-05-09 02:07:57,059 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: USART
+2025-05-09 02:07:57,060 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: SYS
+2025-05-09 02:07:57,060 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: GPIO
+2025-05-09 02:07:57,060 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: RCC
+2025-05-09 02:07:57,060 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: I2C
+2025-05-09 02:07:57,061 [INFO] CodeGenerator:896 - code generatio: config db path: /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.common.mx_6.13.0.202411220809//db/
+2025-05-09 02:07:57,066 [WARN] IP:2251 - I2C_Coeff_DF not found: check if there is a RefParameter without a condition.
+2025-05-09 02:07:57,067 [WARN] IP:2251 - Analog_Filter not found: check if there is a RefParameter without a condition.
+2025-05-09 02:07:57,225 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/MXTmpFiles/license.tmp_save
+2025-05-09 02:07:57,672 [INFO] CodeEngine:279 - Generated code: /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/MXTmpFiles/license.tmp
+2025-05-09 02:07:57,823 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/MXTmpFiles/gpio.tmp_save
+2025-05-09 02:07:58,043 [INFO] CodeEngine:279 - Generated code: /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/MXTmpFiles/gpio.tmp
+2025-05-09 02:07:58,262 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/Core/Src/stm32f4xx_it.c_save
+2025-05-09 02:07:58,606 [INFO] CodeEngine:279 - Generated code: /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/Core/Src/stm32f4xx_it.c
+2025-05-09 02:07:58,611 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/Core/Inc/stm32f4xx_it.h_save
+2025-05-09 02:07:58,703 [INFO] CodeEngine:279 - Generated code: /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/Core/Inc/stm32f4xx_it.h
+2025-05-09 02:07:58,717 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/Core/Src/stm32f4xx_hal_msp.c_save
+2025-05-09 02:07:58,903 [INFO] CodeEngine:279 - Generated code: /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/Core/Src/stm32f4xx_hal_msp.c
+2025-05-09 02:07:58,908 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/MXTmpFiles/system.tmp_save
+2025-05-09 02:07:58,995 [INFO] CodeEngine:279 - Generated code: /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/MXTmpFiles/system.tmp
+2025-05-09 02:07:58,998 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/Core/Src/stm32f4xx_hal_timebase_tim.c_save
+2025-05-09 02:07:59,092 [INFO] CodeEngine:279 - Generated code: /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/Core/Src/stm32f4xx_hal_timebase_tim.c
+2025-05-09 02:07:59,106 [INFO] CodeEngine:311 - oldGeneratedFile, /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/Core/Inc/stm32f4xx_hal_conf.h_save
+2025-05-09 02:07:59,209 [INFO] CodeEngine:335 - Generated code: /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/Core/Inc/stm32f4xx_hal_conf.h
+2025-05-09 02:07:59,285 [INFO] ApiDbMcu:508 - Load IP Config File for USART1
+2025-05-09 02:07:59,291 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/Core/Inc/main.h_save
+2025-05-09 02:07:59,435 [INFO] CodeEngine:279 - Generated code: /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/Core/Inc/main.h
+2025-05-09 02:07:59,439 [INFO] CodeEngine:255 - oldGeneratedFile, /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/Core/Src/main.c_save
+2025-05-09 02:07:59,603 [INFO] CodeEngine:279 - Generated code: /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Menu Cpp/Core/Src/main.c
+2025-05-09 02:07:59,862 [INFO] ProjectBuilder:3289 - Time for Copy HAL[1] : 107mS.
+2025-05-09 02:07:59,869 [INFO] ProjectBuilder:4876 - Project Generator version: 4.5.0-RC5
+2025-05-09 02:08:00,013 [INFO] ConfigFileManager:1579 - The Die is : DIE431
+2025-05-09 02:08:03,574 [INFO] ProjectBuilder:5154 - Time for Generating toolchain IDE Files: 3691mS.
+2025-05-09 02:08:03,583 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 1mS.
+2025-05-09 02:08:03,587 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 1mS.

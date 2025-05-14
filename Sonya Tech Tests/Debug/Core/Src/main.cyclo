@@ -7,6 +7,6 @@
 ../Core/Src/main.c:442:13:MX_GPIO_Init	1
 ../Core/Src/main.c:479:6:StartGreenLed	1
 ../Core/Src/main.c:497:6:HeaterFunction	1
-../Core/Src/main.c:515:6:CoolerFunction	1
-../Core/Src/main.c:534:6:HAL_TIM_PeriodElapsedCallback	2
-../Core/Src/main.c:551:6:Error_Handler	1
+../Core/Src/main.c:526:6:CoolerFunction	1
+../Core/Src/main.c:545:6:HAL_TIM_PeriodElapsedCallback	2
+../Core/Src/main.c:562:6:Error_Handler	1

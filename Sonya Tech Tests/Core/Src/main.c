@@ -500,7 +500,18 @@ void HeaterFunction(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-	  heaterOn(&hi2c1, &htim1);
+	  heaterOn(&hi2c1, &htim1);  //uses temp sensor
+    /**
+	      HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8,1);   //PWM pin for heater
+	  	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, 1);
+	  	  TIM1->CCR1 = 50;				//Select the write channel for pin
+	  	  TIM1->CCR2 = 50;
+	  	  //TIM1->CCR1 = 0;
+	  	  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);  //Select the write channel for pin
+	  	  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
+
+        */
+
   }
   /* USER CODE END HeaterFunction */
 }

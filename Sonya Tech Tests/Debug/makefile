@@ -64,8 +64,8 @@ all: main-build
 main-build: Sonya\ Tech\ Tests.elf secondary-outputs
 
 # Tool invocations
-Sonya\ Tech\ Tests.elf Sonya\ Tech\ Tests.map: $(OBJS) $(USER_OBJS) /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya\ Tech\ Tests/STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Sonya Tech Tests.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya Tech Tests/STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Tests.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Sonya\ Tech\ Tests.elf Sonya\ Tech\ Tests.map: $(OBJS) $(USER_OBJS) /Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya\ Tech\ Tests/STM32F103C6TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Sonya Tech Tests.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Tests/STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Tests.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

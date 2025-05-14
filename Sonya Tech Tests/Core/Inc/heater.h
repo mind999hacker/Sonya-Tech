@@ -4,13 +4,16 @@
 
 
 
-#define KP 5.0f  // Proportional gain
+#define KP 4.0f  // Proportional gain
 #define KI 0.05f  // Integral gain
-#define KD 0.0f  // Derivative gain
+#define KD 0.4f  // Derivative gain
 
 // Define limits for the PWM duty cycle
 #define PWM_MIN 0
 #define PWM_MAX 100
+
+#define target_temperature 170   // Target temperature
+
 
 
 // Function prototypes

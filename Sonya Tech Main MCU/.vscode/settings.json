@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "stm32f4xx_hal.h": "c"
+    }
+}

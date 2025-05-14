@@ -1,0 +1,22 @@
+../Core/Src/main.cpp:72:6:void toggleEgg()	1
+../Core/Src/main.cpp:73:6:void toggleBell()	1
+../Core/Src/main.cpp:74:6:void toggleGpepper()	1
+../Core/Src/main.cpp:75:6:void toggleCheese()	1
+../Core/Src/main.cpp:76:6:void toggleHam()	1
+../Core/Src/main.cpp:77:6:void ingrTogg()	1
+../Core/Src/main.cpp:85:6:void updateFunction()	1
+../Core/Src/main.cpp:88:6:void goStepper()	1
+../Core/Src/main.cpp:91:6:void startFunction()	1
+../Core/Inc/SimpleMenu.h:24:7:SimpleMenu::~SimpleMenu()	1
+../Core/Src/main.cpp:137:6:void display(SimpleMenu*)	2
+../Core/Src/main.cpp:152:6:void displayValue(SimpleMenu*)	1
+../Core/Src/main.cpp:169:5:int main()	6
+../Core/Src/main.cpp:260:6:void SystemClock_Config()	3
+../Core/Src/main.cpp:310:13:void MX_I2C1_Init()	2
+../Core/Src/main.cpp:344:13:void MX_USART1_UART_Init()	2
+../Core/Src/main.cpp:377:13:void MX_GPIO_Init()	1
+../Core/Src/main.cpp:417:6:void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef*)	2
+../Core/Src/main.cpp:434:6:void Error_Handler()	1
+../Core/Src/main.cpp:443:1:void __static_initialization_and_destruction_0(int, int)	9
+../Core/Src/main.cpp:443:1:cpp)	1
+../Core/Src/main.cpp:443:1:cpp)	1

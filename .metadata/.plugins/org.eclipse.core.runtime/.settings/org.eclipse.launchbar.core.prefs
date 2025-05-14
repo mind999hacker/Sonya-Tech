@@ -1,0 +1,10 @@
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=macosx
+configDescList=org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:LCD_Test Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Sonya Tech Main MCU Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Sonya Tech Menu Cpp Debug,org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Sonya Tech Tests Debug
+eclipse.preferences.version=1
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:LCD_Test\ Debug/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:LCD_Test\ Debug/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Sonya\ Tech\ Main\ MCU\ Debug/activeLaunchMode=run
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Sonya\ Tech\ Main\ MCU\ Debug/activeLaunchTarget=null\:---
+org.eclipse.cdt.dsf.gdb.gdbRemotedescriptorType\:Sonya\ Tech\ Tests\ Debug/activeLaunchMode=debug

@@ -1,0 +1,111 @@
+/*
+ * heater.c
+ *
+ *  Created on: Jan 19, 2025
+ *      Author: mindhacker999
+ */
+#include "heater.h"
+
+bool notConnected = 1;
+char i2cdata[2];
+int raw_temp;
+float temperature;
+int timeSinceOn = 0;
+bool turnedOn = true;
+
+
+//PID VARS
+float integral = 0.0f;
+float previous_error = 0.0f;
+static uint32_t last_time;
+uint16_t pidOutput;
+
+uint16_t calculatePIDHeater() {
+
+    uint32_t current_time = HAL_GetTick(); // Get current time in milliseconds
+    float delta_time = (current_time - last_time) / 1000.0f; // Convert to seconds
+    if (delta_time <= 0) delta_time = 0.001; // Avoid division by zero
+    last_time = current_time;
+
+    // Calculate error
+    float error = target_temperature - temperature;
+
+    // Calculate integral (with anti-windup)
+    integral += error * delta_time;
+    if (integral > PWM_MAX / KI) integral = PWM_MAX / KI;
+    if (integral < PWM_MIN / KI) integral = PWM_MIN / KI;
+
+    // Calculate derivative
+    float derivative = (error - previous_error) / delta_time;
+
+    // PID formula
+    float output = (KP * error) + (KI * integral) + (KD * derivative);
+
+    // Clamp output to PWM limits
+    if (output > PWM_MAX) output = PWM_MAX;
+    if (output < PWM_MIN) output = PWM_MIN;
+
+    // Update previous error
+    previous_error = error;
+
+    return (uint16_t)output;
+}
+
+
+void heaterOn(I2C_HandleTypeDef *hi2c1, TIM_HandleTypeDef *htim1)
+{
+	if(notConnected && (HAL_I2C_IsDeviceReady(hi2c1, (0x5A << 1), 1, 100) == HAL_OK))
+		  {
+			  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10,1);
+			  notConnected = 0;
+
+		  }
+	uint32_t current_time = HAL_GetTick();
+
+	if(turnedOn || temperature > target_temperature - 5)
+	{
+		timeSinceOn = current_time;
+		turnedOn = false;
+	}
+
+	  HAL_I2C_Mem_Read(hi2c1, (0x5A << 1), 0x07, 1, (uint8_t*)i2cdata, 2, 100);
+	  raw_temp = ((i2cdata[1] << 8) | (i2cdata[0]));
+	  temperature = raw_temp*0.02 - 273.15;
+
+
+	  osDelay(200);
+
+	  if(temperature < -20 || temperature > 250)  //|| current_time > (timeSinceOn + 150000)
+	  {
+		  TIM1->CCR1 = 0;				//Select the write channel for pin
+		  HAL_TIM_PWM_Start(htim1, TIM_CHANNEL_1);
+	  }
+
+	  else{
+
+	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8,1);   //PWM pin for heater
+	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, 1);
+	  pidOutput = calculatePIDHeater();
+	  TIM1->CCR1 = pidOutput;				//Select the write channel for pin
+	  TIM1->CCR2 = 50;
+	  //TIM1->CCR1 = 0;
+	  HAL_TIM_PWM_Start(htim1, TIM_CHANNEL_1);  //Select the write channel for pin
+	  HAL_TIM_PWM_Start(htim1, TIM_CHANNEL_2);
+	  }
+}
+
+void heaterOff(I2C_HandleTypeDef *hi2c1, TIM_HandleTypeDef *htim1)
+{
+	TIM1->CCR1 = 0;				//Select the write channel for pin
+	TIM1->CCR2 = 0;
+	HAL_TIM_PWM_Start(htim1, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(htim1, TIM_CHANNEL_2);
+
+	 integral = 0.0f;
+	 previous_error = 0.0f;
+	 last_time = 0;
+
+	 turnedOn = true;
+
+}
+

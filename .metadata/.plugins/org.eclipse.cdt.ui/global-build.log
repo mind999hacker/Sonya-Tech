@@ -1,0 +1,283 @@
+20:16:40 **** Incremental Build of configuration Debug for project Sonya Tech Main MCU ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Sonya Tech Main MCU.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Main MCU/STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Main MCU.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Main MCU.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Main\ MCU.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Main\ MCU.elf  > "Sonya Tech Main MCU.list"
+   text	   data	    bss	    dec	    hex	filename
+  25344	    100	  18996	  44440	   ad98	Sonya Tech Main MCU.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Main MCU.list
+ 
+20:17:06 **** Incremental Build of configuration Debug for project Sonya Tech Main MCU ****
+make -j7 all 
+arm-none-eabi-size  Sonya\ Tech\ Main\ MCU.elf 
+   text	   data	    bss	    dec	    hex	filename
+  25344	    100	  18996	  44440	   ad98	Sonya Tech Main MCU.elf
+Finished building: default.size.stdout
+ 
+20:19:36 **** Incremental Build of configuration Debug for project Sonya Tech Main MCU ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Sonya Tech Main MCU.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Main MCU/STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Main MCU.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Main MCU.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Main\ MCU.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Main\ MCU.elf  > "Sonya Tech Main MCU.list"
+   text	   data	    bss	    dec	    hex	filename
+  25344	    100	  18996	  44440	   ad98	Sonya Tech Main MCU.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Main MCU.list
+ 
+20:25:29 **** Incremental Build of configuration Debug for project Sonya Tech Main MCU ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Sonya Tech Main MCU.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Main MCU/STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Main MCU.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Main MCU.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Main\ MCU.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Main\ MCU.elf  > "Sonya Tech Main MCU.list"
+   text	   data	    bss	    dec	    hex	filename
+  25360	    100	  18996	  44456	   ada8	Sonya Tech Main MCU.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Main MCU.list
+ 
+20:41:58 **** Incremental Build of configuration Debug for project Sonya Tech Main MCU ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Sonya Tech Main MCU.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Main MCU/STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Main MCU.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Main MCU.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Main\ MCU.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Main\ MCU.elf  > "Sonya Tech Main MCU.list"
+   text	   data	    bss	    dec	    hex	filename
+  25360	    100	  18996	  44456	   ada8	Sonya Tech Main MCU.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Main MCU.list
+ 
+20:48:31 **** Incremental Build of configuration Debug for project Sonya Tech Main MCU ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Sonya Tech Main MCU.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Main MCU/STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Main MCU.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Main MCU.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Main\ MCU.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Main\ MCU.elf  > "Sonya Tech Main MCU.list"
+   text	   data	    bss	    dec	    hex	filename
+  25360	    100	  18996	  44456	   ada8	Sonya Tech Main MCU.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Main MCU.list
+ 
+21:02:11 **** Incremental Build of configuration Debug for project Sonya Tech Main MCU ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Sonya Tech Main MCU.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Main MCU/STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Main MCU.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Main MCU.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Main\ MCU.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Main\ MCU.elf  > "Sonya Tech Main MCU.list"
+   text	   data	    bss	    dec	    hex	filename
+  25408	    100	  18996	  44504	   add8	Sonya Tech Main MCU.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Main MCU.list
+ 
+21:02:39 **** Incremental Build of configuration Debug for project Sonya Tech Main MCU ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Sonya Tech Main MCU.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Main MCU/STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Main MCU.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Main MCU.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Main\ MCU.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Main\ MCU.elf  > "Sonya Tech Main MCU.list"
+   text	   data	    bss	    dec	    hex	filename
+  25408	    100	  18996	  44504	   add8	Sonya Tech Main MCU.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Main MCU.list
+ 
+21:09:46 **** Incremental Build of configuration Debug for project Sonya Tech Main MCU ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F411xE -c -I../Core/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Sonya Tech Main MCU.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Main MCU/STM32F411CEUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Main MCU.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Main MCU.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Main\ MCU.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Main\ MCU.elf  > "Sonya Tech Main MCU.list"
+   text	   data	    bss	    dec	    hex	filename
+  25408	    100	  18996	  44504	   add8	Sonya Tech Main MCU.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Main MCU.list
+ 
+21:26:35 **** Incremental Build of configuration Debug for project Sonya Tech Tests ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/heater.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/heater.d" -MT"Core/Src/heater.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/heater.o"
+arm-none-eabi-gcc -o "Sonya Tech Tests.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Tests/STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Tests.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Tests.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Tests.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Tests.elf  > "Sonya Tech Tests.list"
+   text	   data	    bss	    dec	    hex	filename
+  29264	    100	   6452	  35816	   8be8	Sonya Tech Tests.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Tests.list
+ 
+21:34:36 **** Incremental Build of configuration Debug for project Sonya Tech Tests ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/heater.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/heater.d" -MT"Core/Src/heater.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/heater.o"
+arm-none-eabi-gcc -o "Sonya Tech Tests.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Tests/STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Tests.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Tests.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Tests.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Tests.elf  > "Sonya Tech Tests.list"
+   text	   data	    bss	    dec	    hex	filename
+  29168	    100	   6452	  35720	   8b88	Sonya Tech Tests.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Tests.list
+ 
+21:36:06 **** Incremental Build of configuration Debug for project Sonya Tech Tests ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/heater.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/heater.d" -MT"Core/Src/heater.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/heater.o"
+arm-none-eabi-gcc -o "Sonya Tech Tests.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Tests/STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Tests.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Tests.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Tests.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Tests.elf  > "Sonya Tech Tests.list"
+   text	   data	    bss	    dec	    hex	filename
+  29168	    100	   6452	  35720	   8b88	Sonya Tech Tests.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Tests.list
+ 
+21:45:18 **** Incremental Build of configuration Debug for project Sonya Tech Tests ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/heater.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/heater.d" -MT"Core/Src/heater.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/heater.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Sonya Tech Tests.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Tests/STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Tests.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Tests.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Tests.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Tests.elf  > "Sonya Tech Tests.list"
+   text	   data	    bss	    dec	    hex	filename
+  29168	    100	   6452	  35720	   8b88	Sonya Tech Tests.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Tests.list
+ 
+21:46:24 **** Incremental Build of configuration Debug for project Sonya Tech Tests ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/heater.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/heater.d" -MT"Core/Src/heater.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/heater.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Sonya Tech Tests.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Tests/STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Tests.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Tests.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Tests.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Tests.elf  > "Sonya Tech Tests.list"
+   text	   data	    bss	    dec	    hex	filename
+  29168	    100	   6452	  35720	   8b88	Sonya Tech Tests.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Tests.list
+ 
+21:48:51 **** Incremental Build of configuration Debug for project Sonya Tech Tests ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/heater.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/heater.d" -MT"Core/Src/heater.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/heater.o"
+arm-none-eabi-gcc -o "Sonya Tech Tests.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Tests/STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Tests.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Tests.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Tests.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Tests.elf  > "Sonya Tech Tests.list"
+   text	   data	    bss	    dec	    hex	filename
+  29168	    100	   6452	  35720	   8b88	Sonya Tech Tests.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Tests.list
+ 
+21:50:49 **** Incremental Build of configuration Debug for project Sonya Tech Tests ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/heater.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/heater.d" -MT"Core/Src/heater.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/heater.o"
+arm-none-eabi-gcc -o "Sonya Tech Tests.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Tests/STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Tests.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Tests.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Tests.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Tests.elf  > "Sonya Tech Tests.list"
+   text	   data	    bss	    dec	    hex	filename
+  29168	    100	   6452	  35720	   8b88	Sonya Tech Tests.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Tests.list
+ 
+21:52:29 **** Incremental Build of configuration Debug for project Sonya Tech Tests ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/heater.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/heater.d" -MT"Core/Src/heater.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/heater.o"
+arm-none-eabi-gcc -o "Sonya Tech Tests.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Tests/STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Tests.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Tests.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Tests.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Tests.elf  > "Sonya Tech Tests.list"
+   text	   data	    bss	    dec	    hex	filename
+  29168	    100	   6452	  35720	   8b88	Sonya Tech Tests.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Tests.list
+ 
+21:53:49 **** Incremental Build of configuration Debug for project Sonya Tech Tests ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/heater.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/heater.d" -MT"Core/Src/heater.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/heater.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "Sonya Tech Tests.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Tests/STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Tests.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Tests.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Tests.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Tests.elf  > "Sonya Tech Tests.list"
+   text	   data	    bss	    dec	    hex	filename
+  29168	    100	   6452	  35720	   8b88	Sonya Tech Tests.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Tests.list
+ 
+22:01:01 **** Incremental Build of configuration Debug for project Sonya Tech Tests ****
+make -j7 all 
+arm-none-eabi-gcc "../Core/Src/heater.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3 -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/heater.d" -MT"Core/Src/heater.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/heater.o"
+arm-none-eabi-gcc -o "Sonya Tech Tests.elf" @"objects.list"   -mcpu=cortex-m3 -T"/Users/mindhacker999/STM32CubeIDE/workspace_1.17.0/Sonya-Tech/Sonya Tech Tests/STM32F103C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Sonya Tech Tests.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Sonya Tech Tests.elf
+ 
+arm-none-eabi-size  Sonya\ Tech\ Tests.elf 
+arm-none-eabi-objdump -h -S Sonya\ Tech\ Tests.elf  > "Sonya Tech Tests.list"
+   text	   data	    bss	    dec	    hex	filename
+  29264	    100	   6452	  35816	   8be8	Sonya Tech Tests.elf
+Finished building: default.size.stdout
+ 
+Finished building: Sonya Tech Tests.list
+ 
+22:10:54 **** Incremental Build of configuration Debug for project Sonya Tech Tests ****
+make -j7 all 
+arm-none-eabi-size  Sonya\ Tech\ Tests.elf 
+   text	   data	    bss	    dec	    hex	filename
+  29264	    100	   6452	  35816	   8be8	Sonya Tech Tests.elf
+Finished building: default.size.stdout
+ 
+22:12:20 **** Incremental Build of configuration Debug for project Sonya Tech Tests ****
+make -j7 all 
+arm-none-eabi-size  Sonya\ Tech\ Tests.elf 
+   text	   data	    bss	    dec	    hex	filename
+  29264	    100	   6452	  35816	   8be8	Sonya Tech Tests.elf
+Finished building: default.size.stdout
+ 
+22:13:10 **** Incremental Build of configuration Debug for project Sonya Tech Tests ****
+make -j7 all 
+arm-none-eabi-size  Sonya\ Tech\ Tests.elf 
+   text	   data	    bss	    dec	    hex	filename
+  29264	    100	   6452	  35816	   8be8	Sonya Tech Tests.elf
+Finished building: default.size.stdout
+ 

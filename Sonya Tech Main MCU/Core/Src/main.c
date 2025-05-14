@@ -22,7 +22,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -33,15 +32,15 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
-#define DIR_PIN_TOP_PAN GPIO_PIN_6
-#define DIR_PORT_TOP_PAN GPIOA
-#define STEP_PIN_TOP_PAN GPIO_PIN_7
-#define STEP_PORT_TOP_PAN GPIOA
+#define DIR_PIN_TOP_PAN GPIO_PIN_0
+#define DIR_PORT_TOP_PAN GPIOB
+#define STEP_PIN_TOP_PAN GPIO_PIN_1
+#define STEP_PORT_TOP_PAN GPIOB
 
-#define DIR_PIN_LINEAR GPIO_PIN_0
-#define DIR_PORT_LINEAR GPIOB
-#define STEP_PIN_LINEAR GPIO_PIN_1
-#define STEP_PORT_LINEAR GPIOB
+#define DIR_PIN_LINEAR GPIO_PIN_6
+#define DIR_PORT_LINEAR GPIOA
+#define STEP_PIN_LINEAR GPIO_PIN_7
+#define STEP_PORT_LINEAR GPIOA
 
 #define DIR_PIN_TILT GPIO_PIN_2
 #define DIR_PORT_TILT GPIOB
@@ -70,11 +69,15 @@ TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim4;
 TIM_HandleTypeDef htim5;
 
+UART_HandleTypeDef huart1;
+DMA_HandleTypeDef hdma_usart1_rx;
+
 osThreadId defaultTaskHandle;
 osThreadId LinearMotorTaskHandle;
 osThreadId TopPanTaskHandle;
 osThreadId PanTiltTaskHandle;
 osThreadId MainTaskHandle;
+osThreadId MenuCommHandle;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -82,16 +85,19 @@ osThreadId MainTaskHandle;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM4_Init(void);
 static void MX_TIM5_Init(void);
+static void MX_USART1_UART_Init(void);
 void StartDefaultTask(void const * argument);
 void LinearMotor(void const * argument);
 void TopPan(void const * argument);
 void PanTilt(void const * argument);
 void Main(void const * argument);
+void MenuCommFunc(void const * argument);
 
 /* USER CODE BEGIN PFP */
 
@@ -134,11 +140,13 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_TIM1_Init();
   MX_TIM2_Init();
   MX_ADC1_Init();
   MX_TIM4_Init();
   MX_TIM5_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6,1); //EGG MOTOR INIT
@@ -188,6 +196,10 @@ int main(void)
   /* definition and creation of MainTask */
   osThreadDef(MainTask, Main, osPriorityNormal, 0, 128);
   MainTaskHandle = osThreadCreate(osThread(MainTask), NULL);
+
+  /* definition and creation of MenuComm */
+  osThreadDef(MenuComm, MenuCommFunc, osPriorityNormal, 0, 128);
+  MenuCommHandle = osThreadCreate(osThread(MenuComm), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -508,6 +520,55 @@ static void MX_TIM5_Init(void)
 }
 
 /**
+  * @brief USART1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART1_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART1_Init 0 */
+
+  /* USER CODE END USART1_Init 0 */
+
+  /* USER CODE BEGIN USART1_Init 1 */
+
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 9600;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART1_Init 2 */
+
+  /* USER CODE END USART1_Init 2 */
+
+}
+
+/**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA2_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA2_Stream2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream2_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream2_IRQn);
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -556,13 +617,27 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+#define LINEAR_STEP_PER_IN 634
+#define TOP_PAN_STEP_PER_IN 725
+
+
 int triggerLinear = 0;
 int triggerTopPan = 0;
 int triggerTilt = 0;
 
+int linearDist = 31;
+
+int linearLimitSwtch = 0;
+
 int posLinear = 0;  // 0->Base , 1->Right , 2->Slow return to base
 int posTopPan = 0;  // 0->Top , 1->Bottom
 int posTilt = 0;    // 0->Normal , 1->Tilt
+
+/***********Menu Variables*******/////////////
+char rx_char;
+char inputBuffer[UART_BUFFER_SIZE];
+int idx = 0;
+int menu[3] = {0,0}; // start, ingrToggle
 
 void microDelay1 (uint16_t delay)
 {
@@ -593,9 +668,9 @@ void stepLinear (int steps, uint8_t direction, uint16_t delay)
   }
 }
 
-void stepTopPan (int steps, uint8_t direction, uint16_t delay)
+void stepTopPan (float steps, uint8_t direction, uint16_t delay)
 {
-  int x;
+  float x;
   if (direction == 0)
     HAL_GPIO_WritePin(DIR_PORT_TOP_PAN, DIR_PIN_TOP_PAN, GPIO_PIN_SET);
   else
@@ -625,34 +700,34 @@ void stepTilt (int steps, uint8_t direction, uint16_t delay)
   }
 }
 
-void dispenseEgg(int speed)
+void ingr5(int speed)
 {
 	 TIM4->CCR1 = speed;
-     HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
+   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
 }
 
-void dispenseOnion(int speed)
+void ingr2(int speed)
 {
 	TIM4->CCR2 = speed;
 	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
 }
 
-void dispenseBellPepper(int speed)
+void ingr4(int speed)
 {
 	TIM4->CCR3 = speed;
 	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
 }
 
-void dispenseHam(int speed)
+void ingr3(int speed)
 {
 	TIM4->CCR4 = speed;
 	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4);
 }
 
-void dispenseCheese(int speed)
+void ingr1(int speed)
 {
 	TIM5->CCR2 = speed;
-	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
+	HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_2);
 }
 
 
@@ -695,27 +770,57 @@ void LinearMotor(void const * argument)
 	  {
 		  if (posLinear == 0)
 		  {
-			  while(!(HAL_GPIO_ReadPin (LIM_SWT_PORT, LIM_SWT_PIN_LINEAR)))
+			  linearLimitSwtch = HAL_GPIO_ReadPin (LIM_SWT_PORT, LIM_SWT_PIN_LINEAR);
+			  while (!(linearLimitSwtch))
 			  {
-				  stepLinear(20,0,1500);
+				  linearLimitSwtch = HAL_GPIO_ReadPin (LIM_SWT_PORT, LIM_SWT_PIN_LINEAR);
+				  stepLinear(50,1,600);
 			  }
-			  triggerLinear = 0;
+
 		  }
 
 		  else if (posLinear == 1)
 		  {
-			  stepLinear(2000, 1, 800);
+			  stepLinear(linearDist*LINEAR_STEP_PER_IN, 0, 400);
 			  triggerLinear = 0;
 		  }
 
 		  else if (posLinear == 2)
 		  {
-			  while(!(HAL_GPIO_ReadPin (LIM_SWT_PORT, LIM_SWT_PIN_LINEAR)))
-			  {
-				  stepLinear(20,0,2200);
-			  }
+
+			  ingr1(100);
+			  osDelay(8000);
+		      ingr1(0);
+
+
+			  stepLinear(3*LINEAR_STEP_PER_IN,1,400);
 			  triggerLinear = 0;
+
+			  ingr2(100);
+			  osDelay(8000);
+			  ingr2(0);
+
+			  stepLinear(3*LINEAR_STEP_PER_IN,1,400);
+			  triggerLinear = 0;
+
+			  ingr3(100);
+			  osDelay(10000);
+			  ingr3(0);
+
+			  stepLinear(10*LINEAR_STEP_PER_IN,1,400);
+			  triggerLinear = 0;
+
+			  posTopPan = 1;
+			  triggerTopPan = 1;
+
+			  stepLinear(14*LINEAR_STEP_PER_IN,1,400);
+
+			  posLinear = 0;
+			  triggerLinear = 1;
+
+
 		  }
+
 	  }
 
     osDelay(1);
@@ -745,7 +850,7 @@ void TopPan(void const * argument)
 				  stepTopPan(20,0,1500);
 			  }
 			  */
-			  stepTopPan(2200,1,700);
+			  stepTopPan(5.4 * TOP_PAN_STEP_PER_IN,1,800);
 
 			  triggerTopPan = 0;
 		  }
@@ -753,7 +858,7 @@ void TopPan(void const * argument)
 
 		  else if (posTopPan == 1)
 		  {
-			  stepTopPan(2200,0,700);
+			  stepTopPan(5.4 * TOP_PAN_STEP_PER_IN,0,1500);
 			  triggerTopPan = 0;
 		  }
 	  }
@@ -779,20 +884,12 @@ void PanTilt(void const * argument)
 	  	  {
 	  		  if (posTilt == 0)
 	  		  {
-	  			  /*while(!(HAL_GPIO_ReadPin (LIM_SWT_PORT, LIM_SWT_PIN_TILT)))
-	  			  {
-	  				  stepTopPan(20,0,1500);
-	  			  }
-	  			  */
-
-				  stepTopPan(500,0,700);
-	  			  triggerTilt = 0;
+	  			    
 	  		  }
 
 	  		  else if (posTilt == 1)
 	  		  {
-	  			  stepTopPan(200,1,700);
-	  			  triggerTilt = 0;
+	  			  
 	  		  }
 	  	  }
     osDelay(1);
@@ -810,69 +907,96 @@ void PanTilt(void const * argument)
 void Main(void const * argument)
 {
   /* USER CODE BEGIN Main */
+	  //**** HOMING ******//
+
+	linearLimitSwtch = HAL_GPIO_ReadPin (LIM_SWT_PORT, LIM_SWT_PIN_LINEAR);
+	if(!linearLimitSwtch)
+	{
+	  posLinear = 0;
+	  triggerLinear = 1;
+	}
+	  while(!linearLimitSwtch)
+      {}
+
+	  //**** DONE HOMING ******//
+
   /* Infinite loop */
   for(;;)
   {
 
+    if(menu[0] == 1)
+    {
+    	menu[0] = 0;
+        posLinear = 1;
+        triggerLinear = 1;
 
-	  //**** HOMING ******//
+        osDelay(27000);
 
-	  /*posLinear = 0;
-	  triggerLinear = 1;
-
-	  posTopPan = 0;
-	  triggerTopPan = 1;
-	  osDelay(10000);
-
-	  posTilt = 0;
-	  triggerTilt = 1;
-	  osDelay(5000);*/
-
-	  //**** DONE HOMING ******//
+        posLinear = 2;
+        triggerLinear = 1;
 
 
-	  /*posLinear = 1;
-	  triggerLinear = 1;
-	  osDelay(5000);
+        osDelay(105000);
 
+        posTopPan = 0;
+        triggerTopPan = 1;
 
-	  posLinear = 2;
-	  triggerLinear = 1;
+    }
 
+    else if(menu[1] == 1)
+    {
+    	menu[1] = 0;
+    	ingr1(100);
+    	ingr2(100);
+    	ingr3(100);
+    	osDelay(5000);
+    	ingr1(0);
+		ingr2(0);
+		ingr3(0);
+    }
 
-
-	  dispenseEgg(100);
-	  osDelay(5000);
-	  dispenseEgg(0);
-	  osDelay(5000);
-
-	  dispenseEgg(100);
-	  osDelay(5000);
-	  dispenseEgg(0);
-	  osDelay(5000);
-
-	  dispenseEgg(100);
-	  osDelay(5000);
-	  dispenseEgg(0);
-	  osDelay(5000);
-
-	  */
-
-
-	  posTopPan = 1;
-	  triggerTopPan = 1;
-	  osDelay(5000);
-
-	  posTopPan = 0;
-	  triggerTopPan = 1;
-	  osDelay(5000);
-
-
-
-
-    osDelay(5000);
   }
   /* USER CODE END Main */
+}
+
+/* USER CODE BEGIN Header_MenuCommFunc */
+/**
+* @brief Function implementing the MenuComm thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_MenuCommFunc */
+void MenuCommFunc(void const * argument)
+{
+  /* USER CODE BEGIN MenuCommFunc */
+  /* Infinite loop */
+
+  for(;;)
+  {
+	  if (HAL_UART_Receive(&huart1, (uint8_t *)&rx_char, 1, HAL_MAX_DELAY) == HAL_OK) {
+	              if (rx_char == '\n') {
+	                  inputBuffer[idx] = '\0'; // null-terminate
+
+	                  // Parse input like "5:123"
+	                  char *sep = strchr(inputBuffer, ':');
+	                  if (sep != NULL) {
+	                      *sep = '\0'; // split
+	                      int index = atoi(inputBuffer);
+	                      int value = atoi(sep + 1);
+
+	                      if (index >= 0 && index < MAX_ARRAY_SIZE) {
+	                          menu[index] = value;
+	                      }
+	                  }
+
+	                  idx = 0; // reset buffer
+	              } else if (idx < UART_BUFFER_SIZE - 1) {
+	                  inputBuffer[idx++] = rx_char;
+	              }
+	          }
+	      }
+    osDelay(1);
+  /* USER CODE END MenuCommFunc */
 }
 
 /**

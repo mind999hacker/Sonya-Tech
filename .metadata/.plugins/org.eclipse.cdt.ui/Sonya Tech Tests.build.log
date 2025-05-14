@@ -1,0 +1,10 @@
+22:13:10 **** Incremental Build of configuration Debug for project Sonya Tech Tests ****
+make -j7 all 
+arm-none-eabi-size  Sonya\ Tech\ Tests.elf 
+   text	   data	    bss	    dec	    hex	filename
+  29264	    100	   6452	  35816	   8be8	Sonya Tech Tests.elf
+Finished building: default.size.stdout
+ 
+
+22:13:10 Build Finished. 0 errors, 0 warnings. (took 255ms)
+

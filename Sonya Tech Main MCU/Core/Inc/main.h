@@ -31,7 +31,13 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
 
+#define UART_BUFFER_SIZE 64
+#define MAX_ARRAY_SIZE 10
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -67,6 +73,8 @@ void Error_Handler(void);
 #define Limit_Switch_Pan_Flip_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
+
+
 
 /* USER CODE END Private defines */
 

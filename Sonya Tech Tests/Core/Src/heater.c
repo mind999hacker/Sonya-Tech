@@ -6,7 +6,6 @@
  */
 #include "heater.h"
 
-int target_temperature = 40;     // Target temperature
 bool notConnected = 1;
 char i2cdata[2];
 int raw_temp;
@@ -76,7 +75,7 @@ void heaterOn(I2C_HandleTypeDef *hi2c1, TIM_HandleTypeDef *htim1)
 
 	  osDelay(200);
 
-	  if(temperature < -20 || temperature > 60)  //|| current_time > (timeSinceOn + 150000)
+	  if(temperature < -20 || temperature > 250)  //|| current_time > (timeSinceOn + 150000)
 	  {
 		  TIM1->CCR1 = 0;				//Select the write channel for pin
 		  HAL_TIM_PWM_Start(htim1, TIM_CHANNEL_1);
@@ -87,8 +86,8 @@ void heaterOn(I2C_HandleTypeDef *hi2c1, TIM_HandleTypeDef *htim1)
 	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8,1);   //PWM pin for heater
 	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, 1);
 	  pidOutput = calculatePIDHeater();
-	  TIM1->CCR1 = pidOutput;				//Select the write channel for pin
-	  TIM1->CCR2 = pidOutput *1.5;
+	  TIM1->CCR1 = pidOutput*1.4;				//Select the write channel for pin
+	  TIM1->CCR2 = pidOutput;
 	  //TIM1->CCR1 = 0;
 	  HAL_TIM_PWM_Start(htim1, TIM_CHANNEL_1);  //Select the write channel for pin
 	  HAL_TIM_PWM_Start(htim1, TIM_CHANNEL_2);
