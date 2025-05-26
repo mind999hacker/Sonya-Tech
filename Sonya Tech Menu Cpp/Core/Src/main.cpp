@@ -63,17 +63,12 @@ static void MX_USART1_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-int eggTime, bellTime, gpepperTime, cheeseTime, hamTime;
+int ingr1, ingr2, ingr3, ingr4, ingr5;
 int topSteps, linearSteps, tiltSteps;
 int dummyValue; // placeholder for unused ranges
 char tx_buffer[16];
 
 /*******ingrTogg**************/
-void toggleEgg() { /* your toggle logic */ }
-void toggleBell() { /* your toggle logic */ }
-void toggleGpepper() { /* your toggle logic */ }
-void toggleCheese() { /* your toggle logic */ }
-void toggleHam() { /* your toggle logic */ }
 void ingrTogg()
 {
 	sprintf(tx_buffer, "%d:%d\n", 1, 1);
@@ -82,10 +77,65 @@ void ingrTogg()
 
 
 /*******ingrTim**************/
-void updateFunction() { /* your update logic */ }
+void updateFunction() { 
+  if(ingr1 != 0)
+  {
+    sprintf(tx_buffer, "%d:%d\n", 2, ingr1);
+	  HAL_UART_Transmit(&huart1, (uint8_t*)tx_buffer, strlen(tx_buffer), 1000);
+	  HAL_Delay(500);
+  }
+  else if(ingr2 != 0)
+  {
+    sprintf(tx_buffer, "%d:%d\n", 3, ingr2);
+    HAL_UART_Transmit(&huart1, (uint8_t*)tx_buffer, strlen(tx_buffer), 1000);
+    HAL_Delay(500);
+  }
+  else if(ingr3 != 0)
+  {
+    sprintf(tx_buffer, "%d:%d\n", 4, ingr3);
+    HAL_UART_Transmit(&huart1, (uint8_t*)tx_buffer, strlen(tx_buffer), 1000);
+    HAL_Delay(500);
+  }
+  else if(ingr4 != 0)
+  {
+    sprintf(tx_buffer, "%d:%d\n", 5, ingr4);
+    HAL_UART_Transmit(&huart1, (uint8_t*)tx_buffer, strlen(tx_buffer), 1000);
+    HAL_Delay(500);
+  }
+  else if(ingr5 != 0)
+  {
+    sprintf(tx_buffer, "%d:%d\n", 6, ingr5);
+    HAL_UART_Transmit(&huart1, (uint8_t*)tx_buffer, strlen(tx_buffer), 1000);
+    HAL_Delay(500);
+  }
+ }
 
 /*******stepperMenu**************/
-void goStepper() { /* your go logic */ }
+void goStepper() 
+ { 
+  if(topSteps != 0)
+  {
+    sprintf(tx_buffer, "%d:%d\n", 7, topSteps);
+    HAL_UART_Transmit(&huart1, (uint8_t*)tx_buffer, strlen(tx_buffer), 1000);
+    HAL_Delay(1000);
+  }
+  else if(linearSteps != 0)
+  {
+    sprintf(tx_buffer, "%d:%d\n", 8, linearSteps);
+    HAL_UART_Transmit(&huart1, (uint8_t*)tx_buffer, strlen(tx_buffer), 1000);
+    HAL_Delay(1000);
+  }
+  else if(tiltSteps != 0)
+  {
+    sprintf(tx_buffer, "%d:%d\n", 9, tiltSteps);
+    HAL_UART_Transmit(&huart1, (uint8_t*)tx_buffer, strlen(tx_buffer), 1000);
+    HAL_Delay(1000);
+  }
+
+    sprintf(tx_buffer, "%d:%d\n", 10, 100);
+    HAL_UART_Transmit(&huart1, (uint8_t*)tx_buffer, strlen(tx_buffer), 1000);
+  
+ }
 
 /*******StartCycle**************/
 void startFunction() { 
@@ -99,28 +149,20 @@ HAL_UART_Transmit(&huart1, data, 12, 1000);*/
 // Ingr Tim submenu (range items)
 SimpleMenu ingrTimMenu[6] = {
     SimpleMenu("Update", updateFunction),
-    SimpleMenu("Egg", &eggTime, 0, 60),
-    SimpleMenu("Bell", &bellTime, 0, 60),
-    SimpleMenu("GPepper", &gpepperTime, 0, 60),
-    SimpleMenu("Cheese", &cheeseTime, 0, 60),
-    SimpleMenu("Ham", &hamTime, 0, 60)
+    SimpleMenu("Ingr 1", &ingr1, 0, 30),
+    SimpleMenu("Ingr 2", &ingr2, 0, 30),
+    SimpleMenu("Ingr 3", &ingr3, 0, 30),
+    SimpleMenu("Ingr 4", &ingr4, 0, 30),
+    SimpleMenu("Ingr 5", &ingr5, 0, 30)
 };
 
-// Ingr Togg submenu (function toggles)
-SimpleMenu ingrToggMenu[5] = {
-    SimpleMenu("Egg", toggleEgg),
-    SimpleMenu("Bell", toggleBell),
-    SimpleMenu("GPepper", toggleGpepper),
-    SimpleMenu("Cheese", toggleCheese),
-    SimpleMenu("Ham", toggleHam)
-};
 
 // Stepper submenu (mix of function and range items)
 SimpleMenu stepperMenu[4] = {
     SimpleMenu("Go", goStepper),
     SimpleMenu("Top", &topSteps, -50, 50),
     SimpleMenu("Linear", &linearSteps, -50, 100),
-    SimpleMenu("Tilt", &tiltSteps, -50, 50)
+    SimpleMenu("Tilt", &tiltSteps, -150, 150)
 };
 
 // Top-level main menu

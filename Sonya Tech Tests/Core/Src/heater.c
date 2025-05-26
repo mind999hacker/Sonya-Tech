@@ -43,7 +43,7 @@ uint16_t calculatePIDHeater() {
 
     // Clamp output to PWM limits
     if (output > PWM_MAX) output = PWM_MAX;
-    if (output < PWM_MIN) output = PWM_MIN;
+    if (output < 20.0) output = 20.0;
 
     // Update previous error
     previous_error = error;
@@ -86,7 +86,7 @@ void heaterOn(I2C_HandleTypeDef *hi2c1, TIM_HandleTypeDef *htim1)
 	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8,1);   //PWM pin for heater
 	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, 1);
 	  pidOutput = calculatePIDHeater();
-	  TIM1->CCR1 = pidOutput*1.4;				//Select the write channel for pin
+	  TIM1->CCR1 = pidOutput*1.9;				//Select the write channel for pin
 	  TIM1->CCR2 = pidOutput;
 	  //TIM1->CCR1 = 0;
 	  HAL_TIM_PWM_Start(htim1, TIM_CHANNEL_1);  //Select the write channel for pin

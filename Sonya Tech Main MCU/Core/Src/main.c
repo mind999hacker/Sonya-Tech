@@ -44,7 +44,7 @@
 
 #define DIR_PIN_TILT GPIO_PIN_2
 #define DIR_PORT_TILT GPIOB
-#define STEP_PIN_TILT GPIO_PIN_10
+#define STEP_PIN_TILT GPIO_PIN_15
 #define STEP_PORT_TILT GPIOB
 
 
@@ -62,10 +62,9 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-ADC_HandleTypeDef hadc1;
-
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim4;
 TIM_HandleTypeDef htim5;
 
@@ -88,10 +87,10 @@ static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_TIM2_Init(void);
-static void MX_ADC1_Init(void);
 static void MX_TIM4_Init(void);
 static void MX_TIM5_Init(void);
 static void MX_USART1_UART_Init(void);
+static void MX_TIM3_Init(void);
 void StartDefaultTask(void const * argument);
 void LinearMotor(void const * argument);
 void TopPan(void const * argument);
@@ -143,10 +142,10 @@ int main(void)
   MX_DMA_Init();
   MX_TIM1_Init();
   MX_TIM2_Init();
-  MX_ADC1_Init();
   MX_TIM4_Init();
   MX_TIM5_Init();
   MX_USART1_UART_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6,1); //EGG MOTOR INIT
@@ -267,58 +266,6 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief ADC1 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_ADC1_Init(void)
-{
-
-  /* USER CODE BEGIN ADC1_Init 0 */
-
-  /* USER CODE END ADC1_Init 0 */
-
-  ADC_ChannelConfTypeDef sConfig = {0};
-
-  /* USER CODE BEGIN ADC1_Init 1 */
-
-  /* USER CODE END ADC1_Init 1 */
-
-  /** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
-  */
-  hadc1.Instance = ADC1;
-  hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
-  hadc1.Init.Resolution = ADC_RESOLUTION_12B;
-  hadc1.Init.ScanConvMode = DISABLE;
-  hadc1.Init.ContinuousConvMode = DISABLE;
-  hadc1.Init.DiscontinuousConvMode = DISABLE;
-  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
-  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc1.Init.NbrOfConversion = 1;
-  hadc1.Init.DMAContinuousRequests = DISABLE;
-  hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
-  if (HAL_ADC_Init(&hadc1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
-  /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
-  */
-  sConfig.Channel = ADC_CHANNEL_2;
-  sConfig.Rank = 1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN ADC1_Init 2 */
-
-  /* USER CODE END ADC1_Init 2 */
-
-}
-
-/**
   * @brief TIM1 Initialization Function
   * @param None
   * @retval None
@@ -378,6 +325,7 @@ static void MX_TIM2_Init(void)
 
   TIM_ClockConfigTypeDef sClockSourceConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_OC_InitTypeDef sConfigOC = {0};
 
   /* USER CODE BEGIN TIM2_Init 1 */
 
@@ -385,7 +333,7 @@ static void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 99;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 4294967295;
+  htim2.Init.Period = 100;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
@@ -397,15 +345,77 @@ static void MX_TIM2_Init(void)
   {
     Error_Handler();
   }
+  if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
   if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
   {
     Error_Handler();
   }
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 0;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
   /* USER CODE BEGIN TIM2_Init 2 */
 
   /* USER CODE END TIM2_Init 2 */
+  HAL_TIM_MspPostInit(&htim2);
+
+}
+
+/**
+  * @brief TIM3 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM3_Init(void)
+{
+
+  /* USER CODE BEGIN TIM3_Init 0 */
+
+  /* USER CODE END TIM3_Init 0 */
+
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_OC_InitTypeDef sConfigOC = {0};
+
+  /* USER CODE BEGIN TIM3_Init 1 */
+
+  /* USER CODE END TIM3_Init 1 */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 99;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 100;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_PWM_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 0;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM3_Init 2 */
+
+  /* USER CODE END TIM3_Init 2 */
+  HAL_TIM_MspPostInit(&htim3);
 
 }
 
@@ -589,27 +599,41 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_10, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_2|GPIO_PIN_15, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : PA6 PA7 */
-  GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7;
+  /*Configure GPIO pin : PA6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_6;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB0 PB1 PB2 PB10 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_10;
+  /*Configure GPIO pin : PA7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_7;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PB0 PB15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : Limit_Switch_Linear_Pin Limit_Switch_Top_Pan_Pin Limit_Switch_Pan_Flip_Pin */
-  GPIO_InitStruct.Pin = Limit_Switch_Linear_Pin|Limit_Switch_Top_Pan_Pin|Limit_Switch_Pan_Flip_Pin;
+  /*Configure GPIO pin : PB2 */
+  GPIO_InitStruct.Pin = GPIO_PIN_2;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : Limit_Switch_Linear_Pin */
+  GPIO_InitStruct.Pin = Limit_Switch_Linear_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  HAL_GPIO_Init(Limit_Switch_Linear_GPIO_Port, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
@@ -619,6 +643,7 @@ static void MX_GPIO_Init(void)
 
 #define LINEAR_STEP_PER_IN 634
 #define TOP_PAN_STEP_PER_IN 725
+#define TILT_STEP_PER_IN 100
 
 
 int triggerLinear = 0;
@@ -637,7 +662,7 @@ int posTilt = 0;    // 0->Normal , 1->Tilt
 char rx_char;
 char inputBuffer[UART_BUFFER_SIZE];
 int idx = 0;
-int menu[3] = {0,0}; // start, ingrToggle
+int menu[MAX_ARRAY_SIZE] = {0,0,8000,8000,8000,0,12000,0,0,0,0}; // start, ingrToggle, ingr1, ingr2, ingr3, ingr4, ingr5, stepTopPan, stepLinear, stepTilt, stepperCommand
 
 void microDelay1 (uint16_t delay)
 {
@@ -652,10 +677,10 @@ void microDelay2 (uint16_t delay)
   while (__HAL_TIM_GET_COUNTER(&htim2) < delay);
 }
 
-void stepLinear (int steps, uint8_t direction, uint16_t delay)
+void stepLinear (int steps, int direction, uint16_t delay)
 {
-  int x;
-  if (direction == 0)
+  //int x;
+  /*if (direction <= 0)
     HAL_GPIO_WritePin(DIR_PORT_LINEAR, DIR_PIN_LINEAR, 1);
   else
     HAL_GPIO_WritePin(DIR_PORT_LINEAR, DIR_PIN_LINEAR, 0);
@@ -666,44 +691,69 @@ void stepLinear (int steps, uint8_t direction, uint16_t delay)
     HAL_GPIO_WritePin(STEP_PORT_LINEAR, STEP_PIN_LINEAR, 0);
     microDelay1(delay);
   }
-}
-
-void stepTopPan (float steps, uint8_t direction, uint16_t delay)
-{
-  float x;
-  if (direction == 0)
-    HAL_GPIO_WritePin(DIR_PORT_TOP_PAN, DIR_PIN_TOP_PAN, GPIO_PIN_SET);
-  else
-    HAL_GPIO_WritePin(DIR_PORT_TOP_PAN, DIR_PIN_TOP_PAN, GPIO_PIN_RESET);
-  for(x=0; x<steps; x=x+1)
-  {
-    HAL_GPIO_WritePin(STEP_PORT_TOP_PAN, STEP_PIN_TOP_PAN, GPIO_PIN_SET);
-    microDelay2(delay);
-    HAL_GPIO_WritePin(STEP_PORT_TOP_PAN, STEP_PIN_TOP_PAN, GPIO_PIN_RESET);
-    microDelay2(delay);
+  */
+  if (direction <= 0)
+    {
+      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, 1);
+      HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 0);
+    }
+  else {
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, 0);
+   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 1);
   }
+
+  TIM2->CCR1 = delay;
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+
+  osDelay(500*steps);
+
+  TIM2->CCR1 = 0;
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+  
 }
 
-void stepTilt (int steps, uint8_t direction, uint16_t delay)
+void stepTopPan (float steps, int direction, uint16_t delay)
+{
+  //float x;
+  if (direction <= 0)
+    {
+      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, 1);
+      HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 0);
+    }
+  else {
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, 0);
+   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, 1);
+  }
+
+  TIM3->CCR4 = delay;
+	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4);
+
+  osDelay(500*steps);
+
+  TIM3->CCR4 = 0;
+	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4);
+}
+
+void stepTilt (int steps, int direction, uint16_t delay)
 {
   int x;
-  if (direction == 0)
+  if (direction <= 0)
     HAL_GPIO_WritePin(DIR_PORT_TILT, DIR_PIN_TILT, GPIO_PIN_SET);
   else
     HAL_GPIO_WritePin(DIR_PORT_TILT, DIR_PIN_TILT, GPIO_PIN_RESET);
   for(x=0; x<steps; x=x+1)
   {
     HAL_GPIO_WritePin(STEP_PORT_TILT, STEP_PIN_TILT, GPIO_PIN_SET);
-    microDelay2(delay);
+    microDelay1(delay);
     HAL_GPIO_WritePin(STEP_PORT_TILT, STEP_PIN_TILT, GPIO_PIN_RESET);
-    microDelay2(delay);
+    microDelay1(delay);
   }
 }
 
 void ingr5(int speed)
 {
-	 TIM4->CCR1 = speed;
-   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
+   TIM4->CCR3 = speed;
+	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
 }
 
 void ingr2(int speed)
@@ -714,8 +764,9 @@ void ingr2(int speed)
 
 void ingr4(int speed)
 {
-	TIM4->CCR3 = speed;
-	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);
+	TIM4->CCR1 = speed;
+   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);
+
 }
 
 void ingr3(int speed)
@@ -770,50 +821,71 @@ void LinearMotor(void const * argument)
 	  {
 		  if (posLinear == 0)
 		  {
+
 			  linearLimitSwtch = HAL_GPIO_ReadPin (LIM_SWT_PORT, LIM_SWT_PIN_LINEAR);
 			  while (!(linearLimitSwtch))
 			  {
 				  linearLimitSwtch = HAL_GPIO_ReadPin (LIM_SWT_PORT, LIM_SWT_PIN_LINEAR);
-				  stepLinear(50,1,600);
+				  //stepLinear(50,1,600);
+          stepLinear(0.5,0,80);
 			  }
+        triggerLinear = 0;
 
 		  }
 
 		  else if (posLinear == 1)
 		  {
-			  stepLinear(linearDist*LINEAR_STEP_PER_IN, 0, 400);
+        //stepLinear(15.5,1,100);
+
+			  //stepLinear(linearDist*LINEAR_STEP_PER_IN, 0, 400);
+
+
 			  triggerLinear = 0;
 		  }
 
 		  else if (posLinear == 2)
 		  {
 
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 1);
+
 			  ingr1(100);
-			  osDelay(8000);
-		      ingr1(0);
+			  osDelay(menu[2]);
+		    ingr1(0);
 
 
-			  stepLinear(3*LINEAR_STEP_PER_IN,1,400);
+			  stepLinear(4,0,80);
 			  triggerLinear = 0;
 
 			  ingr2(100);
-			  osDelay(8000);
+			  osDelay(menu[3]);
 			  ingr2(0);
 
-			  stepLinear(3*LINEAR_STEP_PER_IN,1,400);
+			  stepLinear(4,0,80);
 			  triggerLinear = 0;
 
 			  ingr3(100);
-			  osDelay(10000);
+			  osDelay(menu[4]);
 			  ingr3(0);
 
-			  stepLinear(10*LINEAR_STEP_PER_IN,1,400);
+        stepLinear(4,0,80);
 			  triggerLinear = 0;
+
+			  ingr4(100);
+			  osDelay(menu[5]);
+			  ingr4(0);
+
+        stepLinear(4,0,80);
+			  triggerLinear = 0;
+
+			  ingr5(100);
+			  osDelay(menu[6]);
+			  ingr5(0);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 0);
+
+			  stepLinear(8,0,100);
 
 			  posTopPan = 1;
 			  triggerTopPan = 1;
-
-			  stepLinear(14*LINEAR_STEP_PER_IN,1,400);
 
 			  posLinear = 0;
 			  triggerLinear = 1;
@@ -850,7 +922,7 @@ void TopPan(void const * argument)
 				  stepTopPan(20,0,1500);
 			  }
 			  */
-			  stepTopPan(5.4 * TOP_PAN_STEP_PER_IN,1,800);
+			  stepTopPan(5.8,1,100);
 
 			  triggerTopPan = 0;
 		  }
@@ -858,7 +930,7 @@ void TopPan(void const * argument)
 
 		  else if (posTopPan == 1)
 		  {
-			  stepTopPan(5.4 * TOP_PAN_STEP_PER_IN,0,1500);
+			  stepTopPan(5.8,0,100);
 			  triggerTopPan = 0;
 		  }
 	  }
@@ -884,12 +956,14 @@ void PanTilt(void const * argument)
 	  	  {
 	  		  if (posTilt == 0)
 	  		  {
-	  			    
+	  			    stepTilt(16*TILT_STEP_PER_IN,0,800);
+              triggerTilt = 0;
 	  		  }
 
 	  		  else if (posTilt == 1)
 	  		  {
-	  			  
+	  			  stepTilt(16*TILT_STEP_PER_IN,1,800);
+            triggerTilt = 0;
 	  		  }
 	  	  }
     osDelay(1);
@@ -910,6 +984,7 @@ void Main(void const * argument)
 	  //**** HOMING ******//
 
 	linearLimitSwtch = HAL_GPIO_ReadPin (LIM_SWT_PORT, LIM_SWT_PIN_LINEAR);
+
 	if(!linearLimitSwtch)
 	{
 	  posLinear = 0;
@@ -917,6 +992,9 @@ void Main(void const * argument)
 	}
 	  while(!linearLimitSwtch)
       {}
+     
+
+
 
 	  //**** DONE HOMING ******//
 
@@ -927,32 +1005,69 @@ void Main(void const * argument)
     if(menu[0] == 1)
     {
     	menu[0] = 0;
-        posLinear = 1;
-        triggerLinear = 1;
-
-        osDelay(27000);
+        stepLinear(18.7,1,100);
 
         posLinear = 2;
         triggerLinear = 1;
 
 
-        osDelay(105000);
+        osDelay(52000 + menu[2] + menu[3] + menu[4] + menu[5] + menu[6]);
 
         posTopPan = 0;
         triggerTopPan = 1;
+
+        osDelay(3000);
+
+        posTilt = 1;
+        triggerTilt = 1;
+
+        osDelay(5000);
+
+        posTilt = 0;
+        triggerTilt = 1;
 
     }
 
     else if(menu[1] == 1)
     {
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 1);
     	menu[1] = 0;
     	ingr1(100);
     	ingr2(100);
     	ingr3(100);
+      ingr4(100);
+      ingr5(100);
     	osDelay(5000);
     	ingr1(0);
-		ingr2(0);
-		ingr3(0);
+		  ingr2(0);
+		  ingr3(0);
+      ingr4(0);
+      ingr5(0);
+     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 0);
+
+    }
+    
+    else if(menu[10] > 0)
+    {
+      if(menu[7] != 0)
+      {
+        //stepTopPan(abs(menu[7])* TOP_PAN_STEP_PER_IN, menu[7],800 );
+        stepTopPan(abs(menu[7]),menu[7],100);
+        menu[7] = 0; // Reset top pan command
+      }
+      else if (menu[8] != 0)
+      {
+        //stepLinear(abs(menu[8])* LINEAR_STEP_PER_IN, menu[8], 800);
+        stepLinear(abs(menu[8]),menu[8],100);
+        menu[8] = 0; // Reset linear command
+      }
+      else if (menu[9] != 0)
+      {
+        stepTilt(abs(menu[9])* TILT_STEP_PER_IN, menu[9], 800);
+        menu[9] = 0; // Reset tilt command
+      }
+
+      menu[10] = 0; // Reset stepper command
     }
 
   }
@@ -973,7 +1088,7 @@ void MenuCommFunc(void const * argument)
 
   for(;;)
   {
-	  if (HAL_UART_Receive(&huart1, (uint8_t *)&rx_char, 1, HAL_MAX_DELAY) == HAL_OK) {
+	  if (HAL_UART_Receive(&huart1, (uint8_t *)&rx_char, 1, 1000) == HAL_OK) {
 	              if (rx_char == '\n') {
 	                  inputBuffer[idx] = '\0'; // null-terminate
 
@@ -981,11 +1096,11 @@ void MenuCommFunc(void const * argument)
 	                  char *sep = strchr(inputBuffer, ':');
 	                  if (sep != NULL) {
 	                      *sep = '\0'; // split
-	                      int index = atoi(inputBuffer);
-	                      int value = atoi(sep + 1);
+	                       int indexArr = atoi(inputBuffer);
+	                       int value = atoi(sep + 1);
 
-	                      if (index >= 0 && index < MAX_ARRAY_SIZE) {
-	                          menu[index] = value;
+	                      if (indexArr >= 0 && indexArr < MAX_ARRAY_SIZE) {
+	                          menu[indexArr] = value;
 	                      }
 	                  }
 
@@ -1001,7 +1116,7 @@ void MenuCommFunc(void const * argument)
 
 /**
   * @brief  Period elapsed callback in non blocking mode
-  * @note   This function is called  when TIM3 interrupt took place, inside
+  * @note   This function is called  when TIM9 interrupt took place, inside
   * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
   * a global variable "uwTick" used as application time base.
   * @param  htim : TIM handle
@@ -1012,7 +1127,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 0 */
 
   /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM3) {
+  if (htim->Instance == TIM9) {
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */

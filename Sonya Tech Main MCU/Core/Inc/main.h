@@ -37,7 +37,7 @@ extern "C" {
 #include <stdio.h>
 
 #define UART_BUFFER_SIZE 64
-#define MAX_ARRAY_SIZE 10
+#define MAX_ARRAY_SIZE 11
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -67,10 +67,6 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define Limit_Switch_Linear_Pin GPIO_PIN_13
 #define Limit_Switch_Linear_GPIO_Port GPIOB
-#define Limit_Switch_Top_Pan_Pin GPIO_PIN_14
-#define Limit_Switch_Top_Pan_GPIO_Port GPIOB
-#define Limit_Switch_Pan_Flip_Pin GPIO_PIN_15
-#define Limit_Switch_Pan_Flip_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
